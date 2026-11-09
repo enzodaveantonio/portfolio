@@ -139,7 +139,6 @@ export default function BrewhaCaseStudy() {
                     <li><strong>Some secondary features earn their place by driving adoption.</strong>  The stamp card isn’t essential to taking an order, but it gives customers a reason to order through the app instead of messaging the café, so it got shipped in the first version.</li>
                     <li><strong>Put the rules where they cannot be skipped.</strong>  Pricing, payment checks and stamps live in the database, so every screen, present or future, follows the same rules.</li>
                     <li><strong>Store facts, calculate totals.</strong>  Ledgers for stamps, payments and cash make every number traceable to the rows behind it, a habit from my data engineering background.</li>
-
                 </ul>
             </Section>
         </main>
