@@ -1,3 +1,5 @@
+import Link from "next/link";
+
 export const metadata = {
     title: "Brew-ha: Cafe ordering, payments & loyalty · Enzo Antonio",
     description: "A mobile ordering, payment and loyalty system for an independent café in Siquijor, built end to end with React Native and Supabase.",
@@ -141,6 +143,15 @@ export default function BrewhaCaseStudy() {
                     <li><strong>Store facts, calculate totals.</strong>  Ledgers for stamps, payments and cash make every number traceable to the rows behind it, a habit from my data engineering background.</li>
                 </ul>
             </Section>
+
+            <section className="mt-14 border-t border-gray-200 pt-6 text-sm text-gray-600">
+                <p className="font-medium text-gray-900">Brew-ha app policies</p>
+                <div className="mt-2 flex flex-wrap gap-x-6 gap-y-2">
+                    <Link href="/brewha/privacy" className="underline hover:text-black">Privacy Policy</Link>
+                    <Link href="/brewha/terms" className="underline hover:text-black">Terms of Use</Link>
+                    <Link href="/brewha/delete-account" className="underline hover:text-black">Delete your account</Link>
+                </div>
+            </section>
         </main>
     );
 }
