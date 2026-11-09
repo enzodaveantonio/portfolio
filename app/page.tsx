@@ -2,7 +2,7 @@ import Link from "next/link";
 
 export default function HomePage() {
   return (
-    <main className="mx-auto-max-w-3xl px-6 py-20">
+    <main className="mx-auto max-w-3xl px-6 py-20">
       <h1 className="text-4xl font-bold">Enzo Antonio</h1>
       <p className="mt-4 text-lg text-gray-600">
         React Native developer with a data engineering background.

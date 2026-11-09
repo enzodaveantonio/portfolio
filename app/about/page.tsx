@@ -54,8 +54,8 @@ export default function AboutPage() {
                 <h2 className="text-2xl font-semibold">Working together</h2>
                 <p className="mt-4 text-gray-700">
                     Got a project you’re working on? I work remotely with clients anywhere, on Philippine time (UTC+8). Drop me a short email about what you’re building:{" "}
-                    <a href="mailto:rda.delapena@gmail.com" className="font-medium underline">
-                        rda.delapena@gmail.com
+                    <a href="mailto:hello@enzoantonio.com" className="font-medium underline">
+                        hello@enzoantonio.com
                     </a>
                 </p>
             </section>

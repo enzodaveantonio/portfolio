@@ -33,7 +33,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
             <div className="flex gap-6 text-sm text-gray-600">
               <Link href="/work/brewha" className="hover:text-black">Work</Link>
               <Link href="/about" className="hover:text-black">About</Link>
-              < a href="mailto:rda.delapena@gmail.com" className="hover:text-black">Contact</a>
+              < a href="mailto:hello@enzoantonio.com" className="hover:text-black">Contact</a>
             </div>
           </nav>
         </header>
