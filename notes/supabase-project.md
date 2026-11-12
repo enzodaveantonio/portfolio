@@ -44,7 +44,7 @@ export const supabaseAdmin = createClient(
 
 import "server-only" makes the build fail if this file is ever imported into a client component. It’s a safety net for the secret key.
 
-5. app/cafes/actions.ts: the server action
+5. app/cafes/actions.ts: the server action ✅
 
 "use server";
 import { Resend } from "resend";
@@ -97,7 +97,7 @@ export async function submitLead(_prev: LeadState, form: FormData): Promise<Lead
 
 Look at the try/catch around the email: it’s the same “the important part already succeeded, don’t undo it” thinking as in your loadProfile.
 
-6. app/cafes/LeadForm.tsx: the form (client component)
+6. app/cafes/LeadForm.tsx: the form (client component) ✅
 
 "use client";
 import { useActionState } from "react";
@@ -149,7 +149,7 @@ function Field({ label, ...props }: { label: string } & React.InputHTMLAttribute
 
 useActionState gives you three things: the action’s latest result (state), the function to attach to the form (formAction), and whether it’s still running (pending). You don’t need any useState or onSubmit handlers.
 
-7. app/cafes/page.tsx: the page
+7. app/cafes/page.tsx: the page ✅
 
 Copy the three showcase images into public/cafes/ as ordering.png, loyalty.png and staff.png.
 
