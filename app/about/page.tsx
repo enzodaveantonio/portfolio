@@ -1,65 +1,104 @@
+import type { Metadata } from "next";
+import Image from "next/image";
+import Link from "next/link";
+
 export const metadata = {
     title: "About · Enzo Antonio",
-    description: "React Native developer with a data engineering background, based in the Philippines.",
+    description: "I build apps around how your business actually runs, because I used to run small businesses too.",
 };
+
+type Testimonial = { quote: string; name: string; role: string };
+
+const testimonials: Testimonial[] = [
+    {
+        quote:
+            "He didn’t just take on the technical build; he took responsibility for the business context behind it. What impressed me most was how clearly he communicated.",
+        name: "Jef Lacson",
+        role: "Former CFO, UnionDigital Bank, on working with me",
+    },
+];
+
 
 export default function AboutPage() {
     return (
-        <main className="mx-auto max-w-3xl px-6 py-20">
-            <h1 className="text-4xl font-bold">About</h1>
-
-            <div className="mt-8 space-y-5 text-lg text-gray-700">
-                <p>
-                    Hey there! I’m Enzo, a React Native developer based in the Philippines. I build mobile apps
-                    for small to mid-sized businesses, with secure backends designed so the money and the data always add up.
-                </p>
-
-                <p>
-                    I came to app development from data engineering, where I built pipelines and
-                    dashboards with SQL, PySpark, Databricks, Snowflake and Power BI. That background
-                    shapes how I build apps: rules live in the database where they can’t be skipped,
-                    every number traces back to the records behind it, and reports are calculated,
-                    never typed in by hand. It also means I can build both your app and the
-                    dashboards that show you how your business is really doing.
-                </p>
-
-                <p>
-                    Before tech, I spent four years in real estate, and as a student I started several
-                    small businesses of my own, including a bookstore and a pastry business. So I know
-                    the pain of running the counter, counting the cash at closing, chasing payments and
-                    managing inventory. I build software that takes that work off your plate, so you
-                    can focus on growing the business.
-                </p>
-
-                <p>
-                    I studied Business Economics at Silliman University, graduating magna cum laude.
-                </p>
-            </div>
-
-            <section className="mt-14">
-                <h2 className="text-2xl font-semibold">What I work with</h2>
-                <dl className="mt-4 grid grid-cols-[auto_1fr] gap-x-6 gap-y-3 text-gray-700">
-                    <dt className="font-semibold text-gray-900">Mobile</dt>
-                    <dd>React Native, Expo, TypeScript</dd>
-
-                    <dt className="font-semibold text-gray-900">Backend</dt>
-                    <dd>Supabase, PostgreSQL, Edge Functions</dd>
-
-                    <dt className="font-semibold text-gray-900">Data</dt>
-                    <dd>SQL, PySpark, Databricks, Snowflake, Power BI</dd>
-                </dl>
+        <main>
+            {/* 1. Headline: the why */}
+            <section className="mx-auto max-w-6xl px-6 pt-20 pb-12">
+                <p className="text-sm font-semibold uppercase tracking-wide text-green-800">About</p>
+                <h1 className="mt-4 max-w-3xl text-5xl font-extrabold leading-[1.05] tracking-tight md:text-6xl">
+                    Your unique business needs in one custom app.
+                </h1>
             </section>
 
-            <section className="mt-14">
-                <h2 className="text-2xl font-semibold">Working together</h2>
-                <p className="mt-4 text-gray-700">
-                    Got a project you’re working on? I work remotely with clients anywhere, on Philippine time (UTC+8). Drop me a short email about what you’re building:{" "}
-                    <a href="mailto:hello@enzoantonio.com" className="font-medium underline">
-                        hello@enzoantonio.com
-                    </a>
-                </p>
+            {/* 2 + 3. Photo + story */}
+            <section className="mx-auto grid max-w-6xl items-start gap-12 px-6 pb-24 md:grid-cols-5">
+                <div className="space-y-6 md:col-span-2">
+                    <Image
+                        src="/about/app.png"
+                        alt="Brew-ha customer app and staff order panel"
+                        width={1600}
+                        height={1200}
+                        className="w-full rounded-2xl"
+                    />
+                    <Image
+                        src="/about/enzo.jpg"
+                        alt="Enzo Antonio at Brew-ha Cafe & Bar"
+                        width={1200}
+                        height={900}
+                        className="w-full rounded-2xl object-cover"
+                    />
+                </div>
+                
+                <div className="space-y-5 text-lg leading-relaxed text-gray-700 md:col-span-3">
+                    <p className="text-2xl font-semibold leading-snug text-gray-900">
+                        What if a custom app makes your team’s lives 10x easier?
+                    </p>
+                    <p>
+                        As a former online bookstore & pastry business owner, I have tried multiple generic business apps to streamline operations... 
+                    </p>
+                    <p>
+                        You know how frustrating it is to compromise because you have to work around the app’s default features. Or worse, manually inputting your data using spreadsheets or pen & paper... That’s why I started building apps. 
+                    </p>
+                    <p>
+                        My first app—Brew-ha Cafe & Bar—was a test project for my brother’s coffee shop. We began with the core features. Then, he asked: “Can we add notifications and a cash entry for income and expenses?” Days later, those features were live.
+                    </p>
+                    <p>
+                         And that’s how we’re gonna work together—you tell me the outcomes you want, I build it, you test and approve it. Might even give you better, alternative ideas. We speak the same language anyway ;)
+                    </p>
+                    <p>
+                        The bonus? With my data engineering background, I’ll design your database such that you can trust the numbers your app shows you. 
+                    </p>
+                    <Link href="/work/brewha" className="inline-block font-semibold text-green-800 hover:underline">
+                        Read the Brew-ha case study →
+                    </Link>
+                </div>
+            </section>
+
+            {/* 4. Testimonials */}
+            <section className="bg-green-900 py-20 text-white">
+                <div className="mx-auto max-w-4xl space-y-16 px-6 text-center">
+                    {testimonials.map((t) => (
+                        <figure key={t.name}>
+                            <blockquote className="text-2xl font-medium leading-snug md:text-3xl">“{t.quote}”</blockquote>
+                            <figcaption className="mt-6 text-green-200">
+                                <span className="font-semibold text-white">{t.name}</span> · {t.role}
+                            </figcaption>
+                        </figure>
+                    ))}
+                </div>
             </section>
             
+            {/* 6. CTA */}
+            <section className="mx-auto max-w-3xl px-6 py-24 text-center">
+                <h2 className="text-4xl font-extrabold tracking-tight">Tell me how your business runs.</h2>
+                <p className="mt-4 text-lg text-gray-700">I’ll tell you honestly what an app could do for it, and what it couldn’t.</p>
+                <Link
+                    href="/contact"
+                    className="mt-8 inline-block rounded-full bg-green-800 px-8 py-3 font-semibold text-white hover:bg-green-900"
+                >
+                    Let’s talk
+                </Link>
+            </section>
         </main>
-    )
+    );
 }

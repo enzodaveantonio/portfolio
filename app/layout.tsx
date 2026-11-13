@@ -32,16 +32,15 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
               Enzo Antonio
             </Link>
             <div className="flex items-center gap-6 text-sm text-gray-600">
+              <Link href="/" className="hover:text-black">Home</Link>
               <Link href="/services" className="hover:text-black">Services</Link>
-              <Link href="/cafes" className="hover:text-black">For cafés</Link>
-              <Link href="/work/brewha" className="hover:text-black">Work</Link>
               <Link href="/about" className="hover:text-black">About</Link>
-              <a
-                href="mailto:hello@enzoantonio.com"
+              <Link
+                href="/contact"
                 className="rounded-full bg-green-800 px-4 py-2 font-semibold text-white hover:bg-green-900"
               >
                 Contact
-              </a>
+              </Link>
             </div>
           </nav>
         </header>
