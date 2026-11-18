@@ -22,7 +22,7 @@ export default function NavLinks() {
                     key={l.href}
                     href={l.href}
                     aria-current={isActive(l.href) ? "page" : undefined}
-                    className={`${l.mobile ? "" : "hidden sm: inline"} ${
+                    className={`${l.mobile ? "" : "hidden sm:inline"} ${
                         isActive(l.href)
                             ? "font-semibold text-green-800"
                             : "text-gray-600 hover:text-black"

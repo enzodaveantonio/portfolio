@@ -9,8 +9,8 @@ export const metadata: Metadata = {
 
 export default function CafesPage() {
     return (
-        <main className="mx-auto max-w-3xl px-6 py-20">
-            <h1 className="text-5xl font-extrabold tracking-tight">
+        <main className="mx-auto max-w-3xl px-6 py-12 sm:py-20">
+            <h1 className="text-4xl sm:text-5xl font-extrabold tracking-tight">
                 Your café’s own app.
                 <br />
                 <span className="text-green-800">See it free in 48 hours.</span>
@@ -53,7 +53,7 @@ export default function CafesPage() {
                 </ol>
             </section>
 
-            <section id="demo" className="mt-16 rounded-2xl border border-gray-200 p-8">
+            <section id="demo" className="mt-16 rounded-2xl border border-gray-200 p-5 sm:p-8">
                 <h2 className="text-2xl font-bold">Get your free demo</h2>
                 <p className="mt-1 text-gray-600">I only take on a few cafés at a time, so each one gets proper attention.</p>
                 <div className="mt-6">
