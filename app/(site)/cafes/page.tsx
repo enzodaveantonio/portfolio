@@ -4,7 +4,7 @@ import LeadForm from "./LeadForm";
 
 export const metadata: Metadata = {
     title: "Your café’s own app · Enzo Antonio",
-    description: "See your café’s own ordering and loyalty app, free, in 48 hours.",
+    description: "Ordering, loyalty stamps and a staff panel, branded as yours. See a free demo in 48 hours.",
 };
 
 export default function CafesPage() {

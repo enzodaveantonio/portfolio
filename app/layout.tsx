@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
-import Link from "next/link";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
+import { Analytics } from "@vercel/analytics/next";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -14,6 +14,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL("https://enzoantonio.com"),
   title: "Enzo Antonio · React Native Developer",
   description: "React Native developer in Siquijor. Ordering, loyalty and admin apps for cafés and small businesses.",
 };
@@ -26,26 +27,8 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       style={{ colorScheme: "light" }}
     >
       <body className="bg-white text-gray-900 antialiased">
-        <header className="border-b border-gray-200">
-          <nav className="mx-auto flex max-w-6xl items-center justify-between px-6 py-4">
-            <Link href="/" className="font-semibold">
-              Enzo Antonio
-            </Link>
-            <div className="flex items-center gap-6 text-sm text-gray-600">
-              <Link href="/" className="hover:text-black">Home</Link>
-              <Link href="/services" className="hover:text-black">Services</Link>
-              <Link href="/about" className="hover:text-black">About</Link>
-              <Link
-                href="/contact"
-                className="rounded-full bg-green-800 px-4 py-2 font-semibold text-white hover:bg-green-900"
-              >
-                Contact
-              </Link>
-            </div>
-          </nav>
-        </header>
-
         {children}
+        <Analytics />
       </body>
     </html>
   );
