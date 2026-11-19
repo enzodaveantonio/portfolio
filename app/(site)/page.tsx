@@ -20,6 +20,12 @@ const services = [
     href: "/services",
     cta: "See packages",
   },
+  {
+    title: "Dashboards for your data",
+    body: "See your sales, orders, and operations at a glance, without digging through spreadsheets.",
+    href: "/dashboard-demo",
+    cta: "Try the live demo",
+  },
 ];
 
 export default function HomePage() {
@@ -31,7 +37,7 @@ export default function HomePage() {
           <p className="text-sm font-semibold uppercase tracking-wide text-green-800">
             React Native developer · Siquijor, PH
           </p>
-          <h1 className="mt-5 text-5xl font-extrabold leading-[1.05] tracking-tight md:text-6xl">
+          <h1 className="mt-5 text-4xl md:text-6xl font-extrabold leading-[1.05] tracking-tight md:text-6xl">
             I build apps that bring your customers back.
           </h1>
           <p className="mt-6 max-w-lg text-lg text-gray-700">
@@ -58,12 +64,12 @@ export default function HomePage() {
       </section>
 
       {/* 2. Three columns: what I do */}
-      <section className="bg-stone-100 py-20">
+      <section className="bg-stone-100 py-12 md:py-24">
         <div className="mx-auto max-w-6xl px-6">
           <h2 className="text-center text-3xl font-bold tracking-tight">What I do</h2>
           <div className="mt-12 grid gap-6 md:grid-cols-3">
             {services.map((s) => (
-              <div key={s.title} className="flex flex-col rounded-2xl bg-white p-8 shadow-sm">
+              <div key={s.title} className="flex flex-col rounded-2xl bg-white p-6 md:p-8 shadow-sm">
                 <h3 className="text-xl font-bold">{s.title}</h3>
                 <p className="mt-3 flex-1 text-gray-700">{s.body}</p>
                 <Link href={s.href} className="mt-6 font-semibold text-green-800 hover:underline">
@@ -95,6 +101,24 @@ export default function HomePage() {
           <p className="mt-3 text-sm text-gray-500">React Native · Expo · Supabase</p>
           <Link href="/work/brewha" className="mt-6 inline-block font-semibold text-green-800 hover:underline">
             Read the case study →
+          </Link>
+        </div>
+      </section>
+
+      {/* 4. Live demo */}
+      <section className="mx-auto max-w-6xl px-6 pb-16 sm:pb-24">
+        <div className="flex flex-col gap-6 rounded-2xl border border-gray-200 p-6 sm:flex-row sm:items-center sm:justify-between sm:p-8">
+          <div>
+            <p className="text-sm font-semibold uppercase tracking-wide text-green-800">Live demo</p>
+            <h2 className="mt-2 text-2xl font-bold sm:text-3xl">A dashboard you can click around in.</h2>
+            <p className="mt-2 max-w-xl text-gray-700">
+              Targets vs actuals, year-over-year, branch comparisons and an export you can check in Excel.
+              Sample café data, built the same way I&rsquo;d build yours.
+            </p>
+          </div>
+          <Link href="/dashboard-demo"
+            className="shrink-0 rounded-full bg-green-800 px-6 py-3 text-center font-semibold text-white hover:bg-green-900">
+            Open the demo
           </Link>
         </div>
       </section>
