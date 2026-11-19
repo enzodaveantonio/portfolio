@@ -1,0 +1,1 @@
+grant insert, update on public.services to service_role;

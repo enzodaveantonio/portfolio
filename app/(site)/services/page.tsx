@@ -15,8 +15,10 @@ type Service = {
     features: string[];
     price: number | null;
     price_prefix: string | null;
+    price_note: string | null;
     monthly_price: number | null;
     need: string;
+
 };
 
 type Settings = {
@@ -34,7 +36,7 @@ async function getServices() {
 
     const { data, error } = await supabaseAdmin
         .from("services")
-        .select("slug, title, summary, features, price, price_prefix, monthly_price, need")
+        .select("slug, title, summary, features, price, price_prefix, price_note, monthly_price, need")
         .eq("is_active", true)
         .order("sort_order");
 
@@ -63,8 +65,8 @@ export default async function ServicesPage() {
     const off = Math.round(settings.ph_discount * 100);
 
     return(
-        <main className="mx-auto max-w-6xl px-6 py-20">
-            <h1 className="max-w-3xl text-5xl font-extrabold leading-[1.05] tracking-tight">
+        <main className="mx-auto max-w-6xl px-6 py-12 sm:py-20">
+            <h1 className="max-w-3xl text-4xl sm:text-5xl font-extrabold leading-[1.05] tracking-tight">
                 Clear packages. Honest prices.
             </h1>
             <p className="mt-6 max-w-2xl text-lg text-gray-700">
@@ -76,7 +78,7 @@ export default async function ServicesPage() {
                     {settings.founding_offer} {settings.founding_slots_left} left.
                 </p>
             )}
-
+            
             <div className="mt-16 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
                 {services.map((s) => (
                     <ServiceCard key={s.slug} s={s} settings={settings} />
@@ -99,12 +101,12 @@ function ServiceCard({ s, settings }: { s: Service; settings: Settings }) {
     const rate = settings.php_per_usd;
 
     return (
-        <div className="flex flex-col rounded-2xl border border-gray-200 p-8">
+        <div className="flex flex-col rounded-2xl border border-gray-200 p-6 sm:p-8">
             <h3 className="text-xl font-bold">{s.title}</h3>
             <p className="mt-2 text-gray-700">{s.summary}</p>
 
             {s.price === null ? (
-                <p className="mt-6 text-2xl font-extrabold">Custom quote</p>
+                <p className="mt-6 text-2xl font-extrabold">{s.price_note ?? "Custom quote"}</p>
             ) : (
                 <>
                     <p className="mt-6 text-2xl font-extrabold">
@@ -121,6 +123,12 @@ function ServiceCard({ s, settings }: { s: Service; settings: Settings }) {
                 <p className="mt-2 text-sm text-gray-600">
                     + {usd(Number(s.monthly_price))}/mo care · PH: {php(Number(s.monthly_price) * factor * rate)}/mo
                 </p>
+            )}
+
+            {s.slug === "business-dashboard" && (
+                <Link href="/dashboard-demo" className="mt-2 self-start text-sm font-semibold text-green-800 hover:underline">
+                    See a live demo →
+                </Link>
             )}
 
             <ul className="mt-6 flex-1 space-y-2 text-sm text-gray-700">
