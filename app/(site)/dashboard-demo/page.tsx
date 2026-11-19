@@ -7,6 +7,7 @@ import RevenueChart from "./RevenueChart";
 import PlanChart from "./PlanChart";
 import YtdChart from "./YtdChart";
 import { CATEGORIES } from "./categories";
+import DataTable, { type Leaf } from "./DataTable";
 
 export const metadata: Metadata = {
   title: "Dashboard demo · Enzo Antonio",
@@ -50,6 +51,14 @@ async function getPerformance() {
   return data as Performance;
 }
 
+async function getMatrix(year: number) {
+  "use cache";
+  cacheLife("hours");
+  const { data, error } = await supabaseAdmin.rpc("demo_matrix", { p_year: year });
+  if (error) throw error;
+  return (data ?? []) as Leaf[];
+}
+
 const peso = (n: number) => "₱" + Math.round(n).toLocaleString("en-PH");
 const fmtDay = (s: string) =>
   new Intl.DateTimeFormat("en-US", { month: "short", day: "numeric", timeZone: "UTC" }).format(new Date(s + "T00:00:00Z"));
@@ -70,7 +79,7 @@ function pts(cur: number | null, prev: number | null): Change {
   return { up: c >= 0, text: `${Math.abs(c).toFixed(1)} pts` };
 }
 
-type Params = Promise<{ range?: string; tab?: string }>;
+type Params = Promise<{ range?: string; tab?: string; year?: string }>;
 
 export default function DashboardDemoPage({ searchParams }: { searchParams: Params }) {
   return (
@@ -98,17 +107,20 @@ export default function DashboardDemoPage({ searchParams }: { searchParams: Para
 }
 
 async function Content({ searchParams }: { searchParams: Params }) {
-  const { range, tab } = await searchParams;
-  const isPerformance = tab === "performance";
+  const { range, tab, year } = await searchParams;
+  const current = tab === "performance" || tab === "data" ? tab : "overview";
   const days = RANGES.includes(Number(range) as (typeof RANGES)[number]) ? Number(range) : 30;
 
   return (
     <>
       <nav className="mt-10 flex gap-6 border-b border-gray-200 text-sm">
-        <TabLink href="/dashboard-demo" active={!isPerformance}>Overview</TabLink>
-        <TabLink href="/dashboard-demo?tab=performance" active={isPerformance}>Performance</TabLink>
+        <TabLink href="/dashboard-demo" active={current === "overview"}>Overview</TabLink>
+        <TabLink href="/dashboard-demo?tab=performance" active={current === "performance"}>Performance</TabLink>
+        <TabLink href="/dashboard-demo?tab=data" active={current === "data"}>Data</TabLink>
       </nav>
-      {isPerformance ? <PerformanceView /> : <OverviewView days={days} />}
+      {current === "performance" && <PerformanceView />}
+      {current === "data" && <DataView year={year} />}
+      {current === "overview" && <OverviewView days={days} />}
     </>
   );
 }
@@ -304,6 +316,51 @@ async function PerformanceView() {
             );
           })}
         </ul>
+      </Card>
+    </>
+  );
+}
+
+/* ---------------- Data ---------------- */
+
+async function DataView({ year }: { year?: string }) {
+  const p = await getPerformance();
+  const years = [...new Set(p.ytd.map((y) => y.year))].sort();
+  const selected = years.includes(Number(year)) ? Number(year) : years[years.length - 1];
+
+  const rows = await getMatrix(selected);
+
+  // Reconcile against the YTD chart: same window, so the totals must match to the peso
+  const matrixTotal = rows.reduce((s, r) => s + Number(r.revenue), 0);
+  const chartTotal = p.ytd.filter((y) => y.year === selected).reduce((s, y) => s + Number(y.revenue), 0);
+  const matches = Math.abs(matrixTotal - chartTotal) < 0.01;
+
+  return (
+    <>
+      <div className="mt-6 flex flex-wrap items-center justify-between gap-3">
+        <p className="text-sm text-gray-500">Jan 1 to {fmtDay(p.anchor)}, {selected} · all branches</p>
+        <div className="flex items-center gap-3">
+          <div className="flex rounded-full border border-gray-200 p-1 text-sm">
+            {years.map((y) => (
+              <Link key={y} href={`/dashboard-demo?tab=data&year=${y}`} scroll={false}
+                className={y === selected
+                  ? "rounded-full bg-green-800 px-3 py-1 font-semibold text-white"
+                  : "rounded-full px-3 py-1 text-gray-600 hover:text-black"}>
+                {y}
+              </Link>
+            ))}
+          </div>
+        </div>
+      </div>
+
+      <Card title="Revenue explorer" className="mt-6"
+        note="Choose the fields to break the rows down by. Export downloads exactly what's on screen.">
+        <DataTable rows={rows} year={selected} />
+        <p className={`mt-4 text-sm ${matches ? "text-green-700" : "text-red-600"}`}>
+          {matches
+            ? `✓ Total ${peso(matrixTotal)} matches the year-to-date chart on the Performance tab.`
+            : `⚠ Total ${peso(matrixTotal)} doesn't match the year-to-date chart (${peso(chartTotal)}).`}
+        </p>
       </Card>
     </>
   );
