@@ -134,7 +134,8 @@ export default function DataTable({ rows, year }: { rows: Leaf[]; year: number }
         </button>
       </div>
       <p className="mt-2 text-xs text-gray-500">{table.length} {table.length === 1 ? "row" : "rows"}</p>
-
+        <p className="mt-2 text-xs text-gray-500 sm:hidden">Swipe the table sideways to see all columns →</p>
+    
       <div className="mt-3 overflow-x-auto">
         <table className="w-full min-w-[600px] text-sm">
           <thead className="border-b border-gray-200 text-gray-500">

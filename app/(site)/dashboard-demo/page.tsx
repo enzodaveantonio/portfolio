@@ -262,11 +262,11 @@ async function PerformanceView() {
         note={`Each bar covers Jan 1 to ${fmtDay(p.anchor)} of that year, so the years compare fairly.`}>
         <YtdChart data={ytdRows} />
         <div className="mt-4 overflow-x-auto">
-          <table className="w-full text-right text-sm">
+          <table className="w-full text-right text-xs sm:text-sm">
             <thead className="text-gray-500">
               <tr>
                 <th className="py-1 text-left font-normal">Category</th>
-                {ytdRows.map((r) => <th key={r.year} className="py-1 font-normal">{r.year}</th>)}
+                {ytdRows.map((r) => <th key={r.year} className="py-1 pl-4 font-normal">{r.year}</th>)}
               </tr>
             </thead>
             <tbody>
@@ -276,7 +276,7 @@ async function PerformanceView() {
                     <span className="mr-2 inline-block h-2.5 w-2.5 rounded-sm" style={{ background: c.color }} />
                     {c.key}
                   </td>
-                  {ytdRows.map((r) => <td key={r.year} className="py-1.5">{peso(Number(r[c.key]))}</td>)}
+                  {ytdRows.map((r) => <td key={r.year} className="whitespace-nowrap py-1.5 pl-4">{peso(Number(r[c.key]))}</td>)}
                 </tr>
               ))}
             </tbody>
