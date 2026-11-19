@@ -17,6 +17,11 @@ export const metadata: Metadata = {
   metadataBase: new URL("https://enzoantonio.com"),
   title: "Enzo Antonio · React Native Developer",
   description: "React Native developer in Siquijor. Ordering, loyalty and admin apps for cafés and small businesses.",
+  openGraph: {
+    siteName: "Enzo Antonio",
+    type: "website",
+    locale: "en_PH",
+  },
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
