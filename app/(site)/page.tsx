@@ -17,12 +17,6 @@ const services = [
   {
     title: "Dashboards for your data",
     body: "See your sales, orders, and operations at a glance, without digging through spreadsheets.",
-    href: "/services",
-    cta: "See packages",
-  },
-  {
-    title: "Dashboards for your data",
-    body: "See your sales, orders, and operations at a glance, without digging through spreadsheets.",
     href: "/dashboard-demo",
     cta: "Try the live demo",
   },
@@ -37,7 +31,7 @@ export default function HomePage() {
           <p className="text-sm font-semibold uppercase tracking-wide text-green-800">
             React Native developer · Siquijor, PH
           </p>
-          <h1 className="mt-5 text-4xl md:text-6xl font-extrabold leading-[1.05] tracking-tight md:text-6xl">
+          <h1 className="mt-5 text-4xl md:text-6xl font-extrabold leading-[1.05] tracking-tight">
             I build apps that bring your customers back.
           </h1>
           <p className="mt-6 max-w-lg text-lg text-gray-700">
@@ -82,7 +76,7 @@ export default function HomePage() {
       </section>
 
       {/* 3. Main content: proof */}
-      <section className="mx-auto grid max-w-6xl items-center gap-12 px-6 py-24 md:grid-cols-2">
+      <section className="mx-auto grid max-w-6xl items-center gap-12 px-6 py-12 md:py-24 md:grid-cols-2">
         <Image 
           src="/cafes/ordering.png"
           alt="Brew-ha ordering screens"
